@@ -1,4 +1,6 @@
 ﻿using CareerNetCompany.Application.Extensions;
+using CareerNetCompany.Application.Interfaces.Repositories;
+using CareerNetCompany.Persistance.Concretes.Repositories;
 using CareerNetCompany.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,9 +16,10 @@ namespace CareerNetCompany.Persistance
 
         public static void AddPersistanceServices(this IServiceCollection services,IConfiguration configuration)
         {
-            //IRepository DI'ı olacak
-            //ICompanyService DI'ı olacak.
-
+            // IRepository ve Repository sınıflarını DI sistemine ekler
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+           
+            //DbContext DI sistemine ekler
             services.AddDbContext<CareerNetDbContext>(options =>
             {
                 options.UseNpgsql(configuration.GetPostgreSqlConnectionString());
