@@ -1,5 +1,7 @@
 ﻿using CareerNetCompany.Application.Extensions;
+using CareerNetCompany.Application.Interfaces.Company;
 using CareerNetCompany.Application.Interfaces.Repositories;
+using CareerNetCompany.Persistance.Concretes.Companies;
 using CareerNetCompany.Persistance.Concretes.Repositories;
 using CareerNetCompany.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
@@ -13,11 +15,13 @@ namespace CareerNetCompany.Persistance
     /// </summary>
     public static class ServiceRegistration
     {
-
         public static void AddPersistanceServices(this IServiceCollection services,IConfiguration configuration)
         {
             // IRepository ve Repository sınıflarını DI sistemine ekler
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            //ICompanyService sınıfını DI sistemine ekler
+            services.AddScoped<ICompanyService,CompanyService>();
            
             //DbContext DI sistemine ekler
             services.AddDbContext<CareerNetDbContext>(options =>

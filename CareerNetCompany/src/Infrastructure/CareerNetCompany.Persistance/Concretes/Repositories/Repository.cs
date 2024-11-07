@@ -3,7 +3,6 @@ using CareerNetCompany.Domain.Base;
 using CareerNetCompany.Persistance.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 
 namespace CareerNetCompany.Persistance.Concretes.Repositories
 {

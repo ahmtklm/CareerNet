@@ -1,11 +1,11 @@
 ﻿using CareerNetCompany.Application.Dtos;
 
-namespace CareerNetCompany.Application.Interfaces
+namespace CareerNetCompany.Application.Interfaces.Company
 {
     /// <summary>
     /// Company ile ilgili temel işlemlerini tanımlayan arayüz.
     /// </summary>
-    internal interface ICompanyService
+    public interface ICompanyService
     {
         /// <summary>
         /// Yeni bir işveren ekler.
