@@ -24,21 +24,29 @@ namespace CareerNetCompany.Application.Interfaces.Company
         /// <summary>
         /// Belirli bir işvereni siler (soft delete).
         /// </summary>
-        /// <param name="id">Silinmesi istenen işverenin kimliği.</param>
+        /// <param name="companyId">Silinmesi istenen işverenin kimliği.</param>
         /// <returns>Silme işleminin başarılı olup olmadığını gösterir.</returns>
-        Task<bool> DeleteCompanyAsync(Guid id);
+        Task<bool> DeleteCompanyAsync(Guid companyId);
 
         /// <summary>
         /// Kimliğe göre bir işverenin detaylarını getirir.
         /// </summary>
-        /// <param name="id">İşverenin kimliği.</param>
+        /// <param name="companyId">İşverenin kimliği.</param>
         /// <returns>İşverenin detayları.</returns>
-        Task<CompanyDto> GetCompanyByIdAsync(Guid id);
+        Task<CompanyDto> GetCompanyByIdAsync(Guid companyId);
 
         /// <summary>
         /// Tüm işverenlerin listesini getirir.
         /// </summary>
         /// <returns>İşverenlerin detay listesi.</returns>
         Task<IEnumerable<CompanyDto>> GetAllCompaniesAsync();
+
+        /// <summary>
+        /// Firmanın ilan hakkı sayısını kontrol edip yayınlama hakkını 1 azaltır.
+        /// </summary>
+        /// <param name="companyId">İşverenin kimliği.</param>
+        /// <returns></returns>
+        Task<bool> CheckJobRightsAndDecreaseCount(Guid companyId);
+
     }
 }

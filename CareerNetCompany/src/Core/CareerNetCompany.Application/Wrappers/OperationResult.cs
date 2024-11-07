@@ -14,12 +14,12 @@
         /// <summary>
         /// İşlem sonucu döndürülecek mesaj.
         /// </summary>
-        public string Message { get; private set; }
+        public string? Message { get; private set; }
 
         /// <summary>
         /// İşlem sonucunda dönecek veri.
         /// </summary>
-        public T Data { get; private set; }
+        public T? Data { get; private set; }
 
         /// <summary>
         /// Başarılı bir işlem sonucu için yapılandırıcı metot.

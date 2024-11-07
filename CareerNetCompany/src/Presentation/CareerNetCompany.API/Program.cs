@@ -1,4 +1,6 @@
+using CareerNetCompany.API.Middlewares;
 using CareerNetCompany.Persistance;
+using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Global Exception Handling Middleware'i ekler.
+app.UseMiddleware<CompanyExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 
