@@ -1,0 +1,6 @@
+@CareerNetCompany.API_HostAddress = http://localhost:5181
+
+GET {{CareerNetCompany.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
