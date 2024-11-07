@@ -27,7 +27,7 @@ namespace CareerNetCompany.Persistance.Concretes.Companies
             //İşveren aynı telefon numarasıyla tekrar kayıt olmamalıdır
             var isPhoneNumberExist = await _companyRepository.AnyAsync(p => p.PhoneNumber == createDto.PhoneNumber);
             if (isPhoneNumberExist)
-                throw new ClientSideException($"{createDto.PhoneNumber} numaraya ait başka bir firma kayıtlı olmamalıdır.");
+                throw new ConflictException($"{createDto.PhoneNumber} numaraya ait başka bir firma kayıtlı olmamalıdır.");
 
             //Yeni işveren ilan yayınlama hakkı sayısı Dto'da default 2 olduğu için burada ekstra set etmeye gerek yok
             var companyEntity = _mapper.Map<Company>(createDto);
@@ -80,7 +80,7 @@ namespace CareerNetCompany.Persistance.Concretes.Companies
 
             //Firmanın ilan yayınlama hakkı kontrolü
             if (company.JobPostingRightCount <= 0)
-                throw new ClientSideException($"{companyId} Id'li firmanın ilan yayınlama hakkı yoktur.");
+                throw new ConflictException($"{companyId} Id'li firmanın ilan yayınlama hakkı yoktur.");
 
             //İlan yayına aldındığında ilan hakkı 1 azaltılır ve Db'ye güncellenir.
             company.JobPostingRightCount--;

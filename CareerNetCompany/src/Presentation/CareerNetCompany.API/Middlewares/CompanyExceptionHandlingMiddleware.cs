@@ -54,8 +54,8 @@ namespace CareerNetCompany.API.Middlewares
                     result = JsonConvert.SerializeObject(response);
                     break;
 
-                case ClientSideException:
-                    context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                case ConflictException:
+                    context.Response.StatusCode = (int)HttpStatusCode.Conflict;
                     result = JsonConvert.SerializeObject(response);
                     break;
 
