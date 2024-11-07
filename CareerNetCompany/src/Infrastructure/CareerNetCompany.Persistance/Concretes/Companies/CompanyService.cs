@@ -4,7 +4,6 @@ using CareerNetCompany.Application.Exceptions;
 using CareerNetCompany.Application.Interfaces.Company;
 using CareerNetCompany.Application.Interfaces.Repositories;
 using CareerNetCompany.Domain.Entities;
-using CareerNetCompany.Persistance.Concretes.Repositories;
 
 namespace CareerNetCompany.Persistance.Concretes.Companies
 {
@@ -13,8 +12,8 @@ namespace CareerNetCompany.Persistance.Concretes.Companies
     /// </summary>
     public class CompanyService : ICompanyService
     {
-        private readonly IRepository<Company> _companyRepository;
         private readonly IMapper _mapper;
+        private readonly IRepository<Company> _companyRepository;
 
         public CompanyService(IMapper mapper, IRepository<Company> companyRepository)
         {

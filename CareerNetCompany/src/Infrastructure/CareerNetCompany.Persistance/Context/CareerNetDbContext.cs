@@ -9,7 +9,9 @@ namespace CareerNetCompany.Persistance.Context
     /// </summary>
     public class CareerNetDbContext : DbContext
     {
-        public CareerNetDbContext(DbContextOptions<CareerNetDbContext> options):base(options){}
+        public CareerNetDbContext(DbContextOptions<CareerNetDbContext> options) : base(options)
+        {
+        }
 
         /// <summary>
         /// Firma bilgilerini tutan Company tablosu.

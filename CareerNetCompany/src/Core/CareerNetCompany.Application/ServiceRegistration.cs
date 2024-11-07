@@ -14,7 +14,6 @@ namespace CareerNetCompany.Application
         {
             //Application katmanındaki Profile AutoMapper sınıfından türeyen tüm profilleri DI sistemine ekler.
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
         }
 
     }

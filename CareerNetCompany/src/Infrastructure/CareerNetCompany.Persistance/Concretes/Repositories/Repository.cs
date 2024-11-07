@@ -13,62 +13,59 @@ namespace CareerNetCompany.Persistance.Concretes.Repositories
     public class Repository<T> : IRepository<T> where T: BaseEntity
     {
         private readonly CareerNetDbContext _context;
-        private readonly DbSet<T> _dbSet;
-
-        public Repository(CareerNetDbContext context, DbSet<T> dbSet)
+        public Repository(CareerNetDbContext context)
         {
             _context = context;
-            _dbSet = dbSet;
         }
 
         public async Task<T> AddAsync(T entity)
         {
-            await _dbSet.AddAsync(entity);
+            await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
 
         public async Task DeleteAsync(T entity)
         {
-            _dbSet.Remove(entity);
+            _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _dbSet.ToListAsync();
+            return await _context.Set<T>().ToListAsync();
         }
 
         public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> expression)
         {
-            return await _dbSet.Where(expression).ToListAsync();
+            return await _context.Set<T>().Where(expression).ToListAsync();
         }
 
         public async Task<T> GetByIdAsync(Guid id)
         {
-            return await _dbSet.FindAsync(id);
+            return await _context.Set<T>().FindAsync(id);
         }
 
         public async Task<T> GetAsync(Expression<Func<T, bool>> expression)
         {
-            return await _dbSet.FirstOrDefaultAsync(expression);
+            return await _context.Set<T>().FirstOrDefaultAsync(expression);
         }
 
         public async Task<T> UpdateAsync(T entity)
         {
-            _dbSet.Update(entity);
+            _context.Set<T>().Update(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
 
         public IQueryable<T> Where(Expression<Func<T, bool>>? expression = null)
         {
-            return expression == null ? _dbSet : _dbSet.Where(expression);
+            return expression == null ? _context.Set<T>() : _context.Set<T>().Where(expression);
         }
 
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
         {
-            return await _dbSet.AnyAsync(expression);
+            return await _context.Set<T>().AnyAsync(expression);
         }
     }
 }

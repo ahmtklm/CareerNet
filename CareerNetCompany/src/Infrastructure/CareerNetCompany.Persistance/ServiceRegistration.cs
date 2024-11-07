@@ -1,4 +1,5 @@
-﻿using CareerNetCompany.Application.Extensions;
+﻿using CareerNetCompany.Application;
+using CareerNetCompany.Application.Extensions;
 using CareerNetCompany.Application.Interfaces.Company;
 using CareerNetCompany.Application.Interfaces.Repositories;
 using CareerNetCompany.Persistance.Concretes.Companies;
@@ -21,13 +22,14 @@ namespace CareerNetCompany.Persistance
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             //ICompanyService sınıfını DI sistemine ekler
-            services.AddScoped<ICompanyService,CompanyService>();
-           
+            services.AddScoped<ICompanyService, CompanyService>();
+
             //DbContext DI sistemine ekler
             services.AddDbContext<CareerNetDbContext>(options =>
             {
                 options.UseNpgsql(configuration.GetPostgreSqlConnectionString());
             });
+
         }
     }
 }
