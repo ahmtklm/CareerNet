@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CareerNetJob.DAL", "CareerNetJob.DAL", "{3819C2CA-D232-415D-B6CA-4A4ACBD30EF8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CareerNetJob.BLL", "CareerNetJob.BLL", "{A26D58F2-7BDF-40FE-AE0E-9790CFBF9477}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CareerNetJob.WebAPI", "CareerNetJob.WebAPI", "{088C6415-E650-4FFE-A227-0912519BA8AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerNetJob.DataAccess", "CareerNetJob.DAL\CareerNetJob.DataAccess\CareerNetJob.DataAccess.csproj", "{7CF48C30-D5A4-4EB7-B9FA-4D5BCB52DE82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerNetJob.BusinessLogic", "CareerNetJob.BLL\CareerNetJob.BusinessLogic\CareerNetJob.BusinessLogic.csproj", "{B2580977-A633-425E-B928-5806CF7241D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerNetJob.API", "CareerNetJob.WebAPI\CareerNetJob.API\CareerNetJob.API.csproj", "{BEBB1390-EE37-4552-8AAE-399F34CFB72A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7CF48C30-D5A4-4EB7-B9FA-4D5BCB52DE82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CF48C30-D5A4-4EB7-B9FA-4D5BCB52DE82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CF48C30-D5A4-4EB7-B9FA-4D5BCB52DE82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CF48C30-D5A4-4EB7-B9FA-4D5BCB52DE82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2580977-A633-425E-B928-5806CF7241D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2580977-A633-425E-B928-5806CF7241D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2580977-A633-425E-B928-5806CF7241D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2580977-A633-425E-B928-5806CF7241D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEBB1390-EE37-4552-8AAE-399F34CFB72A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEBB1390-EE37-4552-8AAE-399F34CFB72A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEBB1390-EE37-4552-8AAE-399F34CFB72A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEBB1390-EE37-4552-8AAE-399F34CFB72A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7CF48C30-D5A4-4EB7-B9FA-4D5BCB52DE82} = {3819C2CA-D232-415D-B6CA-4A4ACBD30EF8}
+		{B2580977-A633-425E-B928-5806CF7241D6} = {A26D58F2-7BDF-40FE-AE0E-9790CFBF9477}
+		{BEBB1390-EE37-4552-8AAE-399F34CFB72A} = {088C6415-E650-4FFE-A227-0912519BA8AA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7D5F8B41-EA7C-4B9E-9286-DD35A6CC5FFB}
+	EndGlobalSection
+EndGlobal

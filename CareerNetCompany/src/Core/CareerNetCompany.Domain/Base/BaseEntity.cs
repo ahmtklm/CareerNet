@@ -31,7 +31,7 @@
         public DateTime? UpdateDate
         {
             get => _updateDate;
-            set => _updateDate = DateTime.SpecifyKind(value.Value, DateTimeKind.Utc);
+            set => _updateDate = DateTime.SpecifyKind(value!.Value, DateTimeKind.Utc);
         }
     }
 }
