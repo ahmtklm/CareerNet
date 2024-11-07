@@ -53,7 +53,19 @@ namespace CareerNetCompany.Persistance.Concretes.Repositories
 
         public async Task<T> UpdateAsync(T entity)
         {
-            _context.Set<T>().Update(entity);
+            var dbSet = _context.Set<T>();
+
+            entity.CreateDate = dbSet.Where(x => x.Id == entity.Id).Select(z => z.CreateDate).FirstOrDefault();
+
+            try
+            {
+                dbSet.Attach(entity).State = EntityState.Modified;
+            }
+            catch (Exception ex)
+            {
+                dbSet.Update(entity);
+            }
+
             await _context.SaveChangesAsync();
             return entity;
         }

@@ -7,17 +7,25 @@ namespace CareerNetCompany.API.Middlewares
 {
     /// <summary>
     /// Tüm uygulama genelindeki hataları yakalayarak, anlamlı ve kullanıcı dostu hata mesajları dönen global hata yönetimi middleware'i.
-    /// Bu middleware, Fluent Validation hatalarını, özel iş kurallarına bağlı hataları ve beklenmeyen diğer tüm hataları yönetir.
     /// </summary>
     public class CompanyExceptionHandlingMiddleware
     {
         private readonly RequestDelegate _next;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="next"></param>
         public CompanyExceptionHandlingMiddleware(RequestDelegate next)
         {
             _next = next;
         }
 
+        /// <summary>
+        /// Methodun çalıştığı kısım.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public async Task InvokeAsync(HttpContext context)
         {
             try
@@ -33,40 +41,20 @@ namespace CareerNetCompany.API.Middlewares
         private static Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             context.Response.ContentType = "application/json";
-
-            var response = new { message = exception.Message };
-            string result;
-
-            switch (exception)
+            context.Response.StatusCode = exception switch
             {
-                case ValidationException validationException:
-                    // Fluent Validation'dan gelen hatalar
-                    context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    var errors = new List<string>();
-                    foreach (var error in validationException.Errors)
-                        errors.Add(error.ErrorMessage);
-                    result = JsonConvert.SerializeObject(new { message = "Validation errors", errors });
-                    break;
+                KeyNotFoundException => (int)HttpStatusCode.NotFound,
+                ConflictException => (int)HttpStatusCode.Conflict,
+                _ => (int)HttpStatusCode.InternalServerError,
+            };
 
-                case KeyNotFoundException:
-                    // Veri bulunamadığında dönen hata
-                    context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-                    result = JsonConvert.SerializeObject(response);
-                    break;
+            var response = new
+            {
+                error = exception.Message,
+                statusCode = context.Response.StatusCode
+            };
 
-                case ConflictException:
-                    context.Response.StatusCode = (int)HttpStatusCode.Conflict;
-                    result = JsonConvert.SerializeObject(response);
-                    break;
-
-                default:
-                    // Beklenmeyen tüm hatalar için genel bir yanıt
-                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    result = JsonConvert.SerializeObject(new { message = "An unexpected error occurred." });
-                    break;
-            }
-
-            return context.Response.WriteAsync(result);
+            return context.Response.WriteAsync(JsonConvert.SerializeObject(response));
         }
     }
 }

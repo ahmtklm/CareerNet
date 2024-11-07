@@ -23,12 +23,6 @@ namespace CareerNetCompany.Persistance.Concretes.Companies
 
         public async Task<CompanyDto> CreateCompanyAsync(CompanyCreateDto createDto)
         {
-            //İşveren aynı telefon numarasıyla tekrar kayıt olmamalıdır
-            var isPhoneNumberExist = await _companyRepository.AnyAsync(p => p.PhoneNumber == createDto.PhoneNumber);
-            if (isPhoneNumberExist)
-                throw new ConflictException($"{createDto.PhoneNumber} numaraya ait başka bir firma kayıtlı olmamalıdır.");
-
-            //Yeni işveren ilan yayınlama hakkı sayısı Dto'da default 2 olduğu için burada ekstra set etmeye gerek yok
             var companyEntity = _mapper.Map<Company>(createDto);
             var addedCompany = await _companyRepository.AddAsync(companyEntity);
 
@@ -37,10 +31,6 @@ namespace CareerNetCompany.Persistance.Concretes.Companies
 
         public async Task<CompanyDto> UpdateCompanyAsync(CompanyUpdateDto updateDto)
         {
-            //// İşverenin mevcut olup olmadığı kontrol edilir
-            var isExistCompany = await _companyRepository.AnyAsync(p=>p.Id == updateDto.Id);
-            if (!isExistCompany) throw new KeyNotFoundException($"{updateDto.Id} Id'li firma bulunamadı");
-
             var companyEntity = _mapper.Map<Company>(updateDto);
             var updatedCompany = await _companyRepository.UpdateAsync(companyEntity);
             return _mapper.Map<CompanyDto>(updatedCompany);
@@ -69,6 +59,12 @@ namespace CareerNetCompany.Persistance.Concretes.Companies
 
             await _companyRepository.DeleteAsync(company);
             return true;
+        }
+
+        public async Task<bool> GetCompanyByPhoneNumber(string phoneNumber)
+        {
+            var isExist = await _companyRepository.AnyAsync(p => p.PhoneNumber == phoneNumber);
+            return isExist;
         }
 
         public async Task<bool> CheckJobRightsAndDecreaseCount(Guid companyId)

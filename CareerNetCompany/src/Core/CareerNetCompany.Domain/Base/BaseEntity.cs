@@ -11,19 +11,27 @@
         /// </summary>
         public Guid Id { get; set; } = Guid.NewGuid();
 
+
+        private DateTime _createDate;
+
         /// <summary>
         /// Oluşturulma tarihi ve saati.
         /// </summary>
-        public DateTime CreateDate { get; set; } = DateTime.Now;
+        public DateTime CreateDate
+        {
+            get => _createDate;
+            set => _createDate = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+        }
+
+        private DateTime? _updateDate;
 
         /// <summary>
         /// Güncellenme tarihi ve saati.
         /// </summary>
-        public DateTime? UpdateDate { get; set; }
-
-        /// <summary>
-        /// Soft delete işlemi için entity'nin silinmiş olup olmadığını belirtir.
-        /// </summary>
-        public bool IsDeleted { get; set; } = false;
+        public DateTime? UpdateDate
+        {
+            get => _updateDate;
+            set => _updateDate = DateTime.SpecifyKind(value.Value, DateTimeKind.Utc);
+        }
     }
 }

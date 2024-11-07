@@ -1,4 +1,6 @@
 ﻿using CareerNetCompany.Application.MappingProfiles;
+using CareerNetCompany.Application.Validators;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -12,8 +14,8 @@ namespace CareerNetCompany.Application
     {
         public static void AddApplicationServices(this IServiceCollection services)
         {
-            //Application katmanındaki Profile AutoMapper sınıfından türeyen tüm profilleri DI sistemine ekler.
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddValidatorsFromAssemblyContaining<CompanyCreateDtoValidator>();
         }
 
     }

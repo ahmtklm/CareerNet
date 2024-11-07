@@ -2,20 +2,33 @@ using CareerNetCompany.API.Middlewares;
 using CareerNetCompany.Application;
 using CareerNetCompany.Persistance;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+//Validation Filter eklendiði kýsým
+builder.Services.AddControllers(options => options.Filters.Add<ValidationFilter>()).AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 
-//Fluent Validation
-builder.Services.AddFluentValidationAutoValidation()
-                .AddFluentValidationClientsideAdapters();
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
 
 //Environment bilgisine göre appsettings dosyasýný yükleyen kýsým
 var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
@@ -27,6 +40,10 @@ builder.Services.AddApplicationServices();
 
 //Persistance katmanýndaki servisleri IOC'a ekler.
 builder.Services.AddPersistanceServices(builder.Configuration);
+
+//Fluent Validation
+builder.Services.AddFluentValidationAutoValidation()
+                .AddFluentValidationClientsideAdapters();
 
 var app = builder.Build();
 

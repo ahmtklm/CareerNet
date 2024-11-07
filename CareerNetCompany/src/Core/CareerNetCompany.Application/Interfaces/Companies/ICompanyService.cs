@@ -36,6 +36,13 @@ namespace CareerNetCompany.Application.Interfaces.Company
         Task<CompanyDto> GetCompanyByIdAsync(Guid companyId);
 
         /// <summary>
+        /// Telefon numarasına göre şirket bilgisini getiren metod.
+        /// </summary>
+        /// <param name="phoneNumber"></param>
+        /// <returns></returns>
+        Task<bool> GetCompanyByPhoneNumber(string phoneNumber);
+
+        /// <summary>
         /// Tüm işverenlerin listesini getirir.
         /// </summary>
         /// <returns>İşverenlerin detay listesi.</returns>
