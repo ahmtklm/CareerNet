@@ -5,7 +5,7 @@
         /// <summary>
         /// İş İlan Id bilgisi.
         /// </summary>
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// İlanın yayında kalma süresi.İlan yayınlama tarihinden 15 gün sonrası olacak
