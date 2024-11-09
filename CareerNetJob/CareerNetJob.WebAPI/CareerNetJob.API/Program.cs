@@ -1,6 +1,8 @@
+using CareerNetJob.API.Configuration;
 using CareerNetJob.API.Middlewares;
 using CareerNetJob.BusinessLogic;
 using FluentValidation.AspNetCore;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 using System.Text.Json.Serialization;
@@ -20,6 +22,27 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
 });
+
+
+// RabbitMQ ayarlarýný appsettings'ten alýr
+var rabbitMqSettings = builder.Configuration.GetSection("RabbitMqSettings").Get<RabbitMqSettings>();
+
+// MassTransit yapýlandýrmasýný ekler
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(rabbitMqSettings!.Host, h =>
+        {
+            h.Username(rabbitMqSettings.Username!);
+            h.Password(rabbitMqSettings.Password!);
+        });
+        //cfg.ReceiveEndpoint(rabb.Stock_OrderCreatedEventQueue, e => e.ConfigureConsumer<OrderCreatedEventConsumer>(context));
+    });
+});
+
+
+
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
