@@ -2,7 +2,6 @@
 using CareerNetJob.DataAccess.EntityModels;
 using Elastic.Clients.Elasticsearch;
 using Elastic.Clients.Elasticsearch.IndexManagement;
-using Elastic.Clients.Elasticsearch.Nodes;
 using System.Globalization;
 
 namespace CareerNetJob.DataAccess.Clients.Concretes
@@ -23,8 +22,8 @@ namespace CareerNetJob.DataAccess.Clients.Concretes
         /// <returns></returns>
         public async Task<IndexResponse> InsertDocumentAsync(T entity, string indexName)
         {
-            var indeksReponse = await _elasticsearchClient.IndexAsync(entity, x => x.Index(indexName));
-            return indeksReponse;
+            var indexReponse = await _elasticsearchClient.IndexAsync(entity, x => x.Index(indexName));
+            return indexReponse;
         }
 
         /// <summary>

@@ -3,7 +3,10 @@ using CareerNetJob.BusinessLogic.AutoMappings;
 using CareerNetJob.BusinessLogic.Concretes;
 using CareerNetJob.BusinessLogic.Validations;
 using CareerNetJob.DataAccess;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Transport;
 using FluentValidation;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CareerNetJob.BusinessLogic
@@ -20,6 +23,20 @@ namespace CareerNetJob.BusinessLogic
             services.AddDataAccessServices();
             //Fluent Validator
             services.AddValidatorsFromAssemblyContaining<JobCreateDtoValidator>();
+        }
+
+        //Elastic Search Client IServiceCollection'a ekler.
+        public static void AddElasticClientServices(this IServiceCollection services,IConfiguration configuration)
+        {
+            var userName = configuration.GetSection("ElasticSearchSettings")["Username"];
+
+            var password = configuration.GetSection("ElasticSearchSettings")["Password"];
+
+            var settings = new ElasticsearchClientSettings(new Uri(configuration.GetSection("ElasticSearchSettings")["Host"]!)).Authentication(new BasicAuthentication(userName!, password!));
+
+            var client = new ElasticsearchClient(settings);
+
+            services.AddSingleton(client);
         }
     }
 }

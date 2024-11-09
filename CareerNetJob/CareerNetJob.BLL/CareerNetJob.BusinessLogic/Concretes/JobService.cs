@@ -10,7 +10,7 @@ namespace CareerNetJob.BusinessLogic.Concretes
     {
         private readonly IElasticSearchClientRepo<Job> _elasticSearchClientRepo;
         private readonly IMapper _mapper;
-        private readonly string indexName = "careerJobs";
+        private readonly string indexName = "careerjobs";
 
         public JobService(IElasticSearchClientRepo<Job> elasticSearchClientRepo, IMapper mapper)
         {
