@@ -16,6 +16,7 @@ namespace CareerNetCompany.Application
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssemblyContaining<CompanyCreateDtoValidator>();
+            services.AddValidatorsFromAssemblyContaining<CompanyUpdateDtoValidator>();
         }
 
     }

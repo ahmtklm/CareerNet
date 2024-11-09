@@ -22,7 +22,7 @@ namespace CareerNetCompany.Application.Interfaces.Company
         Task<CompanyDto> UpdateCompanyAsync(CompanyUpdateDto updateDto);
 
         /// <summary>
-        /// Belirli bir işvereni siler (soft delete).
+        /// Belirli bir işvereni siler
         /// </summary>
         /// <param name="companyId">Silinmesi istenen işverenin kimliği.</param>
         /// <returns>Silme işleminin başarılı olup olmadığını gösterir.</returns>

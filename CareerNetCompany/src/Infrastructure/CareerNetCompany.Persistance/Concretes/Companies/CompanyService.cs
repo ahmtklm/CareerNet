@@ -75,7 +75,7 @@ namespace CareerNetCompany.Persistance.Concretes.Companies
 
             //Firmanın ilan yayınlama hakkı kontrolü
             if (company.JobPostingRightCount <= 0)
-                throw new ConflictException($"{companyId} Id'li firmanın ilan yayınlama hakkı yoktur.");
+                throw new KeyNotFoundException($"{companyId} Id'li firmanın ilan yayınlama hakkı yoktur.");
 
             //İlan yayına aldındığında ilan hakkı 1 azaltılır ve Db'ye güncellenir.
             company.JobPostingRightCount--;

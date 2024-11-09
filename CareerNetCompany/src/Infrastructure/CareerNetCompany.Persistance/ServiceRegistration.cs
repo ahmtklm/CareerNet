@@ -1,5 +1,4 @@
-﻿using CareerNetCompany.Application;
-using CareerNetCompany.Application.Extensions;
+﻿using CareerNetCompany.Application.Extensions;
 using CareerNetCompany.Application.Interfaces.Company;
 using CareerNetCompany.Application.Interfaces.Repositories;
 using CareerNetCompany.Persistance.Concretes.Companies;
@@ -29,7 +28,6 @@ namespace CareerNetCompany.Persistance
             {
                 options.UseNpgsql(configuration.GetPostgreSqlConnectionString());
             });
-
         }
     }
 }

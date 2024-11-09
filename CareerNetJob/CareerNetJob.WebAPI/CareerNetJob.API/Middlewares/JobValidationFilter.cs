@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 
-namespace CareerNetCompany.API.Middlewares
+namespace CareerNetJob.API.Middlewares
 {
     /// <summary>
     /// ModelState bazında alınan hataları yakalayan filter.
     /// </summary>
-    public class ValidationFilter : IAsyncActionFilter
+    public class JobValidationFilter : IAsyncActionFilter
     {
         /// <summary>
         /// Action olduğunda ModelState üzerindeki hataları yakalar.
@@ -31,3 +31,4 @@ namespace CareerNetCompany.API.Middlewares
         }
     }
 }
+
