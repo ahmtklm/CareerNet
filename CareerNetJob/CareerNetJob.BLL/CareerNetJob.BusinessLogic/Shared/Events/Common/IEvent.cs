@@ -1,4 +1,4 @@
-﻿namespace CareerNetJob.BusinessLogic.Events.Common
+﻿namespace CareerNetJob.BusinessLogic.Shared.Events.Common
 {
     /// <summary>
     /// Tüm event sınıflarının temelini oluşturacak arayüz.

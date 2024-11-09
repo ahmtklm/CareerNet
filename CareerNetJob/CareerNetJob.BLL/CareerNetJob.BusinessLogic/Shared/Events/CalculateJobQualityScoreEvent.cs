@@ -1,6 +1,6 @@
-﻿using CareerNetJob.BusinessLogic.Events.Common;
+﻿using CareerNetJob.BusinessLogic.Shared.Events.Common;
 
-namespace CareerNetJob.BusinessLogic.Events
+namespace CareerNetJob.BusinessLogic.Shared.Events
 {
     /// <summary>
     /// İş ilanının kalite skorunu hesaplamak için kullanılacak event
