@@ -7,6 +7,7 @@ namespace CareerNetJob.BusinessLogic.Validations
     {
         public JobCreateDtoValidator()
         {
+            RuleFor(p => p.CompanyId).NotEmpty().WithMessage("İşveren Id alanı zorunludur.");
             RuleFor(p => p.Position).NotEmpty().WithMessage("İş ilanı pozisyon bilgisi zorunludur.");
             RuleFor(p => p.Description).NotEmpty().WithMessage("İlan açıklama bilgisi zorunludur.");
         }

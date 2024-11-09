@@ -18,10 +18,10 @@ namespace CareerNetJob.BusinessLogic.Concretes
             _mapper = mapper;
         }
 
-        public async Task<JobCreateResponseDto> CreateJobAsync(JobCreateDto jobCreateEntity)
+        public async Task<JobCreateResponseDto> CreateJobAsync(JobCreateDto jobCreateDto)
         {
             //Job Mapping
-            var jobEntity = _mapper.Map<Job>(jobCreateEntity);
+            var jobEntity = _mapper.Map<Job>(jobCreateDto);
             //İlan yayınlama tarihi
             jobEntity.PostedDate = DateTime.Now;
             //İlanın yayında kalma süresi = ilan yayınlama tarihinden 15 gün sonrası

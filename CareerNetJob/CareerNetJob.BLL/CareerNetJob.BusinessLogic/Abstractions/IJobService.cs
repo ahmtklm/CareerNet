@@ -9,6 +9,6 @@ namespace CareerNetJob.BusinessLogic.Abstractions
     {
         Task<List<JobDto>> GetAllJobAsync();
         Task<List<JobDto>> GetAllJobsByExpireDateAsync(string expireDate);
-        Task<JobCreateResponseDto> CreateJobAsync(JobCreateDto jobCreateEntity);
+        Task<JobCreateResponseDto> CreateJobAsync(JobCreateDto jobCreateDto);
     }
 }
