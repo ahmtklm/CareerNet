@@ -3,7 +3,7 @@
     /// <summary>
     /// RabbitMQ ayarlarını tutmak için kullanılan model sınıfı.
     /// </summary>
-    public class RabbitMqSettings
+    public class RabbitMQSettings
     {
         public string? Host { get; set; }
         public string? Username { get; set; }

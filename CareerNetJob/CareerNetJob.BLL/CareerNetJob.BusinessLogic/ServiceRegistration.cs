@@ -1,6 +1,7 @@
 ﻿using CareerNetJob.BusinessLogic.Abstractions;
 using CareerNetJob.BusinessLogic.AutoMappings;
 using CareerNetJob.BusinessLogic.Concretes;
+using CareerNetJob.BusinessLogic.Configuration;
 using CareerNetJob.BusinessLogic.Validations;
 using CareerNetJob.DataAccess;
 using Elastic.Clients.Elasticsearch;
@@ -13,7 +14,7 @@ namespace CareerNetJob.BusinessLogic
 {
     public static class ServiceRegistration
     {
-        public static void AddBusinessLogicServices(this IServiceCollection services)
+        public static void AddBusinessLogicServices(this IServiceCollection services, IConfiguration configuration)
         {
             //AutoMapper
             services.AddAutoMapper(typeof(JobMappingProfile));
@@ -23,20 +24,33 @@ namespace CareerNetJob.BusinessLogic
             services.AddDataAccessServices();
             //Fluent Validator
             services.AddValidatorsFromAssemblyContaining<JobCreateDtoValidator>();
-        }
 
-        //Elastic Search Client IServiceCollection'a ekler.
-        public static void AddElasticClientServices(this IServiceCollection services,IConfiguration configuration)
-        {
+            #region Redis Configuration
+
+            services.Configure<RedisSettings>(configuration.GetSection("RedisSettings"));
+            services.AddSingleton<IRedisService, RedisService>();
+
+            #endregion
+
+            #region IRestrictedWordsService IQualityScoreCalculator
+
+            services.AddScoped<IRestrictedWordsService, RestrictedWordsService>();
+            services.AddScoped<IQualityScoreCalculator, JobQualityScoreCalculator>();
+
+            #endregion
+
+            #region ElasticSearch Configuration
+
+            // Elasticsearch Client DI ekliyoruz
             var userName = configuration.GetSection("ElasticSearchSettings")["Username"];
-
             var password = configuration.GetSection("ElasticSearchSettings")["Password"];
-
-            var settings = new ElasticsearchClientSettings(new Uri(configuration.GetSection("ElasticSearchSettings")["Host"]!)).Authentication(new BasicAuthentication(userName!, password!));
-
+            var settings = new ElasticsearchClientSettings(new Uri(configuration.GetSection("ElasticSearchSettings")["Host"]!))
+                .Authentication(new BasicAuthentication(userName!, password!));
             var client = new ElasticsearchClient(settings);
-
             services.AddSingleton(client);
+
+            #endregion
+
         }
     }
 }
