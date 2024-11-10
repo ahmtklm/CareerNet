@@ -1,6 +1,5 @@
 ﻿using CareerNetJob.BusinessLogic.Abstractions;
 using CareerNetJob.BusinessLogic.Dtos;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CareerNetJob.API.Controllers
