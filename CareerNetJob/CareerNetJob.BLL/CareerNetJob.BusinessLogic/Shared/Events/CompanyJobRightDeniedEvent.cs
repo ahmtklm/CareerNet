@@ -2,6 +2,11 @@
 
 namespace CareerNetJob.BusinessLogic.Shared.Events
 {
+    /// <summary>
+    /// Firmanın ilan yayınlama hakkı olmadığı durumda tetiklenir.
+    /// İlan yayınlanmaz.
+    /// Exception döner.
+    /// </summary>
     public class CompanyJobRightDeniedEvent : IEvent
     {
         public Guid CompanyId { get; set; }

@@ -10,6 +10,7 @@ namespace CareerNetJob.BusinessLogic.EventConsumers.ConfirmedJobRight
     /// </summary>
     public class CompanyJobRightConfirmedEventConsumer : IConsumer<CompanyJobRightConfirmedEvent>
     {
+        private readonly IPublishEndpoint _publishEndpoint;
         private readonly IJobService _jobService;
         private readonly IQualityScoreCalculator _qualityScoreCalculator;
         private readonly IRestrictedWordsService _restrictedWordsService;
@@ -20,11 +21,13 @@ namespace CareerNetJob.BusinessLogic.EventConsumers.ConfirmedJobRight
         /// <param name="jobService"></param>
         /// <param name="qualityScoreCalculator"></param>
         /// <param name="restrictedWordsService"></param>
-        public CompanyJobRightConfirmedEventConsumer(IJobService jobService, IQualityScoreCalculator qualityScoreCalculator, IRestrictedWordsService restrictedWordsService)
+        /// <param name="publishEndpoint"></param>
+        public CompanyJobRightConfirmedEventConsumer(IJobService jobService, IQualityScoreCalculator qualityScoreCalculator, IRestrictedWordsService restrictedWordsService, IPublishEndpoint publishEndpoint)
         {
             _jobService = jobService;
             _qualityScoreCalculator = qualityScoreCalculator;
             _restrictedWordsService = restrictedWordsService;
+            _publishEndpoint = publishEndpoint;
         }
 
         public async Task Consume(ConsumeContext<CompanyJobRightConfirmedEvent> context)
@@ -50,10 +53,17 @@ namespace CareerNetJob.BusinessLogic.EventConsumers.ConfirmedJobRight
                 jobCreateDto.QualityScore = _qualityScoreCalculator.CalculateScore(jobCreateDto);
 
                 //İlanı Elastic Search'e kaydet.
-                var jobPublishResponse = await _jobService.CreateJobAsync(jobCreateDto);
+                await _jobService.CreateJobAsync(jobCreateDto);
             }
             catch (Exception)
             {
+                //İlan elastic search'e kaydedilirken hata alınma durumunda
+                HasExceptionJobCreateEvent hasExceptionJobCreateEvent = new()
+                {
+                    CompanyId = companyId
+                };
+
+                await _publishEndpoint.Publish(hasExceptionJobCreateEvent);
             };
         }
     }

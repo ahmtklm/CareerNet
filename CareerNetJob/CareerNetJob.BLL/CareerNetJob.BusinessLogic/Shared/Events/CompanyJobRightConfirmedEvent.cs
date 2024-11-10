@@ -4,6 +4,9 @@ namespace CareerNetJob.BusinessLogic.Shared.Events
 {
     /// <summary>
     /// Firmanın ilan yayınlama hakkı olduğu onaylandığında tetiklenir.
+    /// Job CreateDto hazırlanır
+    /// İlan Kalite skoru hesaplanır
+    /// İlan Elastice kaydedilir
     /// </summary>
     public class CompanyJobRightConfirmedEvent : IEvent
     {
