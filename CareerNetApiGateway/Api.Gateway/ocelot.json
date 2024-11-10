@@ -41,11 +41,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/Company/Create",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5181
+          "Port": 7195
         }
       ],
       "UpstreamPathTemplate": "/company/create",
@@ -53,23 +53,23 @@
     },
     {
       "DownstreamPathTemplate": "/api/Company/GetAllCompanies",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5181
+          "Port": 7195
         }
       ],
-      "UpstreamPathTemplate": "api/company/get-all-companies",
+      "UpstreamPathTemplate": "/company/get-all-companies",
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
       "DownstreamPathTemplate": "/api/Company/GetCompanyById",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5181
+          "Port": 7195
         }
       ],
       "UpstreamPathTemplate": "/company/get-company-by-id",
@@ -77,11 +77,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/Company/Update",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5181
+          "Port": 7195
         }
       ],
       "UpstreamPathTemplate": "/company/update",
@@ -89,11 +89,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/Company/Delete",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5181
+          "Port": 7195
         }
       ],
       "UpstreamPathTemplate": "/company/delete",
