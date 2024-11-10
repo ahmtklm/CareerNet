@@ -1,5 +1,4 @@
-﻿using CareerNetCompany.Application.MappingProfiles;
-using CareerNetCompany.Application.Validators;
+﻿using CareerNetCompany.Application.Validators;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
