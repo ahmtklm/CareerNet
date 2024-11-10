@@ -1,5 +1,7 @@
 ﻿using CareerNetJob.BusinessLogic.Abstractions;
 using CareerNetJob.BusinessLogic.Dtos;
+using CareerNetJob.BusinessLogic.Shared.Events;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CareerNetJob.API.Controllers
@@ -11,15 +13,18 @@ namespace CareerNetJob.API.Controllers
     [ApiController]
     public class JobController : ControllerBase
     {
+        private readonly IPublishEndpoint _publishEndpoint;
         private readonly IJobService _jobService;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="jobService"></param>
-        public JobController(IJobService jobService)
+        /// <param name="publishEndpoint"></param>
+        public JobController(IJobService jobService,IPublishEndpoint publishEndpoint)
         {
             _jobService = jobService;
+            _publishEndpoint = publishEndpoint;
         }
 
         /// <summary>
@@ -57,7 +62,19 @@ namespace CareerNetJob.API.Controllers
         [HttpPost("PublishJob")]
         public async Task<IActionResult> PublishJob(JobCreateDto jobCreateDto)
         {
-            await _jobService.CreateJobAsync(jobCreateDto);
+            //Firmanın İlan hakkı check eden bir event oluşturuluır
+            CheckCompanyJobRightEvent jobevent = new()
+            {
+                Benefits = jobCreateDto.Benefits,
+                CompanyId = jobCreateDto.CompanyId,
+                Description = jobCreateDto.Description,
+                Position = jobCreateDto.Position,
+                Salary = jobCreateDto.Salary,
+                EmploymentType = jobCreateDto.EmploymentType
+            };
+
+            await _publishEndpoint.Publish(jobevent);
+
             return Created();
         }
     }

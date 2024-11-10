@@ -7,6 +7,6 @@ namespace CareerNetJob.BusinessLogic.Abstractions
     /// </summary>
     public interface IQualityScoreCalculator
     {
-        int CalculateScore(JobCreateDto jobCreateDto);
+        Task<int> CalculateScore(JobCreateDto jobCreateDto);
     }
 }

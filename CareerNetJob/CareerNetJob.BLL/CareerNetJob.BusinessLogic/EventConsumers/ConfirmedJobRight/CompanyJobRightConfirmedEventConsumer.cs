@@ -53,7 +53,7 @@ namespace CareerNetJob.BusinessLogic.EventConsumers.ConfirmedJobRight
                 };
 
                 //İlan kalite skoru hesaplama kısmı
-                jobCreateDto.QualityScore = _qualityScoreCalculator.CalculateScore(jobCreateDto);
+                jobCreateDto.QualityScore = await _qualityScoreCalculator.CalculateScore(jobCreateDto);
 
                 //İlanı Elastic Search'e kaydet.
                 await _jobService.CreateJobAsync(jobCreateDto);

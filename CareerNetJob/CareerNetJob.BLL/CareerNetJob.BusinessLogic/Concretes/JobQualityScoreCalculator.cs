@@ -12,7 +12,7 @@ namespace CareerNetJob.BusinessLogic.Concretes
             _restrictedWordsService = restrictedWordsService;
         }
 
-        public int CalculateScore(JobCreateDto jobCreateDto)
+        public async Task<int> CalculateScore(JobCreateDto jobCreateDto)
         {
             int score = 0;
 
@@ -29,7 +29,7 @@ namespace CareerNetJob.BusinessLogic.Concretes
                 score += 1;
 
             // Sakıncalı kelime kontrolü-Yasaklı kelime içermiyorsa 2 puan
-            var containsRestrictedWords = _restrictedWordsService.ContainsRestrictedWords(jobCreateDto.Description).Result;
+            var containsRestrictedWords = await _restrictedWordsService.ContainsRestrictedWords(jobCreateDto.Description);
             if (!containsRestrictedWords)
                 score += 2;
 
