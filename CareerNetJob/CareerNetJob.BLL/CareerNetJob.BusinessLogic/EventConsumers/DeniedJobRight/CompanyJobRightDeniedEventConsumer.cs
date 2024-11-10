@@ -4,7 +4,9 @@ using MassTransit;
 namespace CareerNetJob.BusinessLogic.EventConsumers.DeniedJobRight
 {
     /// <summary>
-    /// Firmanın ilan yayınlama hakkı olmadığında tetiklenecek olan consumer
+    /// Firmanın ilan yayınlama hakkı olmadığı durumda tetiklenir.
+    /// İlan yayınlanmaz.
+    /// Exception döner.
     /// </summary>
     public class CompanyJobRightDeniedEventConsumer : IConsumer<CompanyJobRightDeniedEvent>
     {

@@ -6,7 +6,10 @@ using MassTransit;
 namespace CareerNetJob.BusinessLogic.EventConsumers.ConfirmedJobRight
 {
     /// <summary>
-    /// Firmanın ilan yayınlama hakkı olduğunda tetiklenecek olan consumer
+    /// Firmanın ilan yayınlama hakkı olduğu onaylandığında tetiklenir.
+    /// Job CreateDto hazırlanır
+    /// İlan Kalite skoru hesaplanır
+    /// İlan Elastice kaydedilir
     /// </summary>
     public class CompanyJobRightConfirmedEventConsumer : IConsumer<CompanyJobRightConfirmedEvent>
     {

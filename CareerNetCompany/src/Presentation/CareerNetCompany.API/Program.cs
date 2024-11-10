@@ -26,17 +26,17 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 
 
 // RabbitMQ ayarlarýný appsettings'ten alýr
-var rabbitMqSettings = builder.Configuration.GetSection("RabbitMqSettings").Get<RabbitMqSettings>();
+var rabbitMQSettings = builder.Configuration.GetSection("RabbitMQSettings").Get<RabbitMQSettings>();
 
 // MassTransit yapýlandýrmasýný ekler
 builder.Services.AddMassTransit(x =>
 {
     x.UsingRabbitMq((context, cfg) =>
     {
-        cfg.Host(rabbitMqSettings!.Host, h =>
+        cfg.Host(rabbitMQSettings!.Host, h =>
         {
-            h.Username(rabbitMqSettings.Username!);
-            h.Password(rabbitMqSettings.Password!);
+            h.Username(rabbitMQSettings.Username!);
+            h.Password(rabbitMQSettings.Password!);
         });
         //cfg.ReceiveEndpoint(rabb.Stock_OrderCreatedEventQueue, e => e.ConfigureConsumer<OrderCreatedEventConsumer>(context));
     });

@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Infrastructure\CareerNetCompany.Infrastructure\CareerNetCompany.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Infrastructure\CareerNetCompany.Persistance\CareerNetCompany.Persistance.csproj" />
   </ItemGroup>
 

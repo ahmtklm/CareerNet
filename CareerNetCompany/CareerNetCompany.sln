@@ -13,15 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{C27E46AC-1E3F-4459-A00E-87A528525328}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerNetCompany.Application", "src\Core\CareerNetCompany.Application\CareerNetCompany.Application.csproj", "{B2DE9061-543A-45A2-B561-5EB80590AD75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerNetCompany.Application", "src\Core\CareerNetCompany.Application\CareerNetCompany.Application.csproj", "{B2DE9061-543A-45A2-B561-5EB80590AD75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerNetCompany.Domain", "src\Core\CareerNetCompany.Domain\CareerNetCompany.Domain.csproj", "{4D218D4F-FDA2-471C-B33A-8C9D2274A1F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerNetCompany.Domain", "src\Core\CareerNetCompany.Domain\CareerNetCompany.Domain.csproj", "{4D218D4F-FDA2-471C-B33A-8C9D2274A1F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerNetCompany.Infrastructure", "src\Infrastructure\CareerNetCompany.Infrastructure\CareerNetCompany.Infrastructure.csproj", "{E99B1FAE-9F5F-4B29-A49B-DFD9E00E18B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerNetCompany.Persistance", "src\Infrastructure\CareerNetCompany.Persistance\CareerNetCompany.Persistance.csproj", "{53F58ABA-23C0-4A36-9E45-57921030B930}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerNetCompany.Persistance", "src\Infrastructure\CareerNetCompany.Persistance\CareerNetCompany.Persistance.csproj", "{53F58ABA-23C0-4A36-9E45-57921030B930}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerNetCompany.API", "src\Presentation\CareerNetCompany.API\CareerNetCompany.API.csproj", "{732E37FB-3445-4E88-B834-8F1AFFF31732}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerNetCompany.API", "src\Presentation\CareerNetCompany.API\CareerNetCompany.API.csproj", "{732E37FB-3445-4E88-B834-8F1AFFF31732}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +35,6 @@ Global
 		{4D218D4F-FDA2-471C-B33A-8C9D2274A1F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D218D4F-FDA2-471C-B33A-8C9D2274A1F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D218D4F-FDA2-471C-B33A-8C9D2274A1F1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E99B1FAE-9F5F-4B29-A49B-DFD9E00E18B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E99B1FAE-9F5F-4B29-A49B-DFD9E00E18B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E99B1FAE-9F5F-4B29-A49B-DFD9E00E18B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E99B1FAE-9F5F-4B29-A49B-DFD9E00E18B9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{53F58ABA-23C0-4A36-9E45-57921030B930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{53F58ABA-23C0-4A36-9E45-57921030B930}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53F58ABA-23C0-4A36-9E45-57921030B930}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,7 +53,6 @@ Global
 		{C27E46AC-1E3F-4459-A00E-87A528525328} = {DAF49D51-E17F-4683-AD8A-160D219CFE63}
 		{B2DE9061-543A-45A2-B561-5EB80590AD75} = {B4B5C2BC-8AC4-4F9E-96F3-DCE675049059}
 		{4D218D4F-FDA2-471C-B33A-8C9D2274A1F1} = {B4B5C2BC-8AC4-4F9E-96F3-DCE675049059}
-		{E99B1FAE-9F5F-4B29-A49B-DFD9E00E18B9} = {24ED0BA3-38DD-4EF2-9DBD-1310C0CF071C}
 		{53F58ABA-23C0-4A36-9E45-57921030B930} = {24ED0BA3-38DD-4EF2-9DBD-1310C0CF071C}
 		{732E37FB-3445-4E88-B834-8F1AFFF31732} = {C27E46AC-1E3F-4459-A00E-87A528525328}
 	EndGlobalSection
