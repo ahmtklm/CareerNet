@@ -1,6 +1,9 @@
 using CareerNetCompany.API.Configuration;
 using CareerNetCompany.API.Middlewares;
 using CareerNetCompany.Application;
+using CareerNetCompany.Application.EventConsumers.CheckCompanyJobRight;
+using CareerNetCompany.Application.EventConsumers.HasExceptionJobCreate;
+using CareerNetCompany.Application.Shared.EventsQueue;
 using CareerNetCompany.Persistance;
 using FluentValidation.AspNetCore;
 using MassTransit;
@@ -29,16 +32,21 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 var rabbitMQSettings = builder.Configuration.GetSection("RabbitMQSettings").Get<RabbitMQSettings>();
 
 // MassTransit yapýlandýrmasýný ekler
-builder.Services.AddMassTransit(x =>
+builder.Services.AddMassTransit(configurator =>
 {
-    x.UsingRabbitMq((context, cfg) =>
+    configurator.AddConsumer<CheckCompanyJobRightEventConsumer>();
+    configurator.AddConsumer<HasExceptionJobCreateEventConsumer>();
+    configurator.UsingRabbitMq((context, _cfg) =>
     {
-        cfg.Host(rabbitMQSettings!.Host, h =>
+        _cfg.Host("rabbitmq://"+rabbitMQSettings!.Host, h =>
         {
             h.Username(rabbitMQSettings.Username!);
             h.Password(rabbitMQSettings.Password!);
         });
-        //cfg.ReceiveEndpoint(rabb.Stock_OrderCreatedEventQueue, e => e.ConfigureConsumer<OrderCreatedEventConsumer>(context));
+
+        _cfg.ReceiveEndpoint(RabbitMqQueue.HasExceptionJobCreateEventQueue, e => e.ConfigureConsumer<HasExceptionJobCreateEventConsumer>(context));
+
+        _cfg.ReceiveEndpoint(RabbitMqQueue.CheckCompanyJobRightEventQueue, e => e.ConfigureConsumer<CheckCompanyJobRightEventConsumer>(context));
     });
 });
 

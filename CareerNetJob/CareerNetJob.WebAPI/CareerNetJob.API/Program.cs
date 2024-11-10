@@ -4,6 +4,10 @@ using CareerNetJob.BusinessLogic;
 using CareerNetJob.BusinessLogic.Abstractions;
 using CareerNetJob.BusinessLogic.Concretes;
 using CareerNetJob.BusinessLogic.Configuration;
+using CareerNetJob.BusinessLogic.EventConsumers.ConfirmedJobRight;
+using CareerNetJob.BusinessLogic.EventConsumers.DeniedJobRight;
+using CareerNetJob.BusinessLogic.Shared.Events;
+using CareerNetJob.BusinessLogic.Shared.EventsQueue;
 using FluentValidation.AspNetCore;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
@@ -52,16 +56,22 @@ builder.Services.AddBusinessLogicServices(builder.Configuration);
 var rabbitMQSettings = builder.Configuration.GetSection("RabbitMQSettings").Get<RabbitMQSettings>();
 
 // MassTransit yapýlandýrmasýný ekler
-builder.Services.AddMassTransit(x =>
+builder.Services.AddMassTransit(configurator =>
 {
-    x.UsingRabbitMq((context, cfg) =>
+    configurator.AddConsumer<CompanyJobRightConfirmedEventConsumer>();
+    configurator.AddConsumer<CompanyJobRightDeniedEventConsumer>();
+
+    configurator.UsingRabbitMq((context, _cfg) =>
     {
-        cfg.Host(rabbitMQSettings!.Host, h =>
+        _cfg.Host("rabbitmq://"+rabbitMQSettings!.Host, h =>
         {
             h.Username(rabbitMQSettings.Username!);
             h.Password(rabbitMQSettings.Password!);
         });
-        //cfg.ReceiveEndpoint(rabb.Stock_OrderCreatedEventQueue, e => e.ConfigureConsumer<OrderCreatedEventConsumer>(context));
+
+        _cfg.ReceiveEndpoint(RabbitMqQueue.CompanyJobRightConfirmedEventQueue, e => e.ConfigureConsumer<CompanyJobRightConfirmedEventConsumer>(context));
+
+        _cfg.ReceiveEndpoint(RabbitMqQueue.CompanyJobRightDeniedEventQueue, e => e.ConfigureConsumer<CompanyJobRightDeniedEventConsumer>(context));
     });
 });
 
