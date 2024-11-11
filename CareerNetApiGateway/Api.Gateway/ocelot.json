@@ -5,11 +5,11 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/Job/GetAllJobs",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5180
+          "Port": 7196
         }
       ],
       "UpstreamPathTemplate": "/job/get-all-jobs",
@@ -17,11 +17,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/Job/GetAllJobsByExpireDate",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5180
+          "Port": 7196
         }
       ],
       "UpstreamPathTemplate": "/job/get-all-jobs-by-expire-date",
@@ -29,11 +29,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/Job/PublishJob",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5180
+          "Port": 7196
         }
       ],
       "UpstreamPathTemplate": "/job/publish-job",
