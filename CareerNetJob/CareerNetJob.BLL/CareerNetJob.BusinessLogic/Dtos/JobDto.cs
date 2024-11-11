@@ -3,11 +3,6 @@
     public class JobDto
     {
         /// <summary>
-        /// İş İlan Id bilgisi.
-        /// </summary>
-        public string Id { get; set; }
-
-        /// <summary>
         /// İlanın yayında kalma süresi.İlan yayınlama tarihinden 15 gün sonrası olacak
         /// </summary>
         public required DateTime ExpireDate { get; set; }

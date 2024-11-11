@@ -63,17 +63,19 @@ namespace CareerNetJob.API.Controllers
         public async Task<IActionResult> PublishJob(JobCreateDto jobCreateDto)
         {
             //Firmanın İlan hakkı check eden bir event oluşturuluır
-            CheckCompanyJobRightEvent jobevent = new()
-            {
-                Benefits = jobCreateDto.Benefits,
-                CompanyId = jobCreateDto.CompanyId,
-                Description = jobCreateDto.Description,
-                Position = jobCreateDto.Position,
-                Salary = jobCreateDto.Salary,
-                EmploymentType = jobCreateDto.EmploymentType
-            };
+            //CheckCompanyJobRightEvent jobevent = new()
+            //{
+            //    Benefits = jobCreateDto.Benefits,
+            //    CompanyId = jobCreateDto.CompanyId,
+            //    Description = jobCreateDto.Description,
+            //    Position = jobCreateDto.Position,
+            //    Salary = jobCreateDto.Salary,
+            //    EmploymentType = jobCreateDto.EmploymentType
+            //};
 
-            await _publishEndpoint.Publish(jobevent);
+            //await _publishEndpoint.Publish(jobevent);
+
+            await _jobService.CreateJobAsync(jobCreateDto);
 
             return Created();
         }
