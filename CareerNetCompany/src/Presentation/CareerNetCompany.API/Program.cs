@@ -36,7 +36,7 @@ builder.Services.AddMassTransit(configurator =>
     configurator.AddConsumer<HasExceptionJobCreateEventConsumer>();
     configurator.UsingRabbitMq((context, _cfg) =>
     {
-        _cfg.Host("rabbitmq://"+rabbitMQSettings!.Host, h =>
+        _cfg.Host("rabbitmq://" + rabbitMQSettings!.Host, h =>
         {
             h.Username(rabbitMQSettings.Username!);
             h.Password(rabbitMQSettings.Password!);
