@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\CareerNetJob.DAL\CareerNetJob.DataAccess\CareerNetJob.DataAccess.csproj" />
+    <ProjectReference Include="..\..\Shared\EventShared\EventShared.csproj" />
   </ItemGroup>
 
 </Project>

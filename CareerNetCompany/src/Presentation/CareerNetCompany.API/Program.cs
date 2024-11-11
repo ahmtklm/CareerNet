@@ -1,7 +1,7 @@
 using CareerNetCompany.API.Configuration;
-using CareerNetCompany.API.EventConsumers.CheckCompanyJobRight;
 using CareerNetCompany.API.Middlewares;
 using CareerNetCompany.Application;
+using CareerNetCompany.Application.EventConsumers.CheckCompanyJobRight;
 using CareerNetCompany.Application.EventConsumers.HasExceptionJobCreate;
 using CareerNetCompany.Persistance;
 using EventShared.EventsQueue;

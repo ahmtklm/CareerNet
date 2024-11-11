@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Shared\EventShared\EventShared.csproj" />
     <ProjectReference Include="..\CareerNetCompany.Domain\CareerNetCompany.Domain.csproj" />
   </ItemGroup>
 

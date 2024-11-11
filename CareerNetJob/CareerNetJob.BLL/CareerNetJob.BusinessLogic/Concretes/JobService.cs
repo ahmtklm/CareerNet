@@ -36,8 +36,6 @@ namespace CareerNetJob.BusinessLogic.Concretes
             var expireDate = jobEntity.PostedDate.AddDays(15);
             jobEntity.ExpireDate = new DateTime(expireDate.Year, expireDate.Month, expireDate.Day);
 
-        
-
             //ElasticSearch'e kaydeder.
             var result = await _elasticSearchClientRepo.InsertDocumentAsync(jobEntity, _indexName);
             if (!result.IsValidResponse) throw new Exception($"{typeof(Job)} elasticSearch'e kaydedilmedi");

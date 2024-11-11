@@ -5,7 +5,7 @@ using EventShared.Events;
 using EventShared.EventsQueue;
 using MassTransit;
 
-namespace CareerNetCompany.API.EventConsumers.CheckCompanyJobRight
+namespace CareerNetCompany.Application.EventConsumers.CheckCompanyJobRight
 {
     /// <summary>
     /// Firmanın iş ilanı yayınlama hakkını kontrol etmek için kullanılan consumer.
