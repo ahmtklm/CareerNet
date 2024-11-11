@@ -9,11 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CareerNetJob.BLL", "CareerN
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CareerNetJob.WebAPI", "CareerNetJob.WebAPI", "{088C6415-E650-4FFE-A227-0912519BA8AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerNetJob.DataAccess", "CareerNetJob.DAL\CareerNetJob.DataAccess\CareerNetJob.DataAccess.csproj", "{7CF48C30-D5A4-4EB7-B9FA-4D5BCB52DE82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerNetJob.DataAccess", "CareerNetJob.DAL\CareerNetJob.DataAccess\CareerNetJob.DataAccess.csproj", "{7CF48C30-D5A4-4EB7-B9FA-4D5BCB52DE82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerNetJob.BusinessLogic", "CareerNetJob.BLL\CareerNetJob.BusinessLogic\CareerNetJob.BusinessLogic.csproj", "{B2580977-A633-425E-B928-5806CF7241D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerNetJob.BusinessLogic", "CareerNetJob.BLL\CareerNetJob.BusinessLogic\CareerNetJob.BusinessLogic.csproj", "{B2580977-A633-425E-B928-5806CF7241D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CareerNetJob.API", "CareerNetJob.WebAPI\CareerNetJob.API\CareerNetJob.API.csproj", "{BEBB1390-EE37-4552-8AAE-399F34CFB72A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CareerNetJob.API", "CareerNetJob.WebAPI\CareerNetJob.API\CareerNetJob.API.csproj", "{BEBB1390-EE37-4552-8AAE-399F34CFB72A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{898B9B32-BA51-4A1A-A416-AA6BE217ECD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventShared", "Shared\EventShared\EventShared.csproj", "{18A1623C-7B7F-4C9A-9B52-44A95243C8B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,10 @@ Global
 		{BEBB1390-EE37-4552-8AAE-399F34CFB72A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEBB1390-EE37-4552-8AAE-399F34CFB72A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEBB1390-EE37-4552-8AAE-399F34CFB72A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18A1623C-7B7F-4C9A-9B52-44A95243C8B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18A1623C-7B7F-4C9A-9B52-44A95243C8B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18A1623C-7B7F-4C9A-9B52-44A95243C8B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18A1623C-7B7F-4C9A-9B52-44A95243C8B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +49,7 @@ Global
 		{7CF48C30-D5A4-4EB7-B9FA-4D5BCB52DE82} = {3819C2CA-D232-415D-B6CA-4A4ACBD30EF8}
 		{B2580977-A633-425E-B928-5806CF7241D6} = {A26D58F2-7BDF-40FE-AE0E-9790CFBF9477}
 		{BEBB1390-EE37-4552-8AAE-399F34CFB72A} = {088C6415-E650-4FFE-A227-0912519BA8AA}
+		{18A1623C-7B7F-4C9A-9B52-44A95243C8B4} = {898B9B32-BA51-4A1A-A416-AA6BE217ECD4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7D5F8B41-EA7C-4B9E-9286-DD35A6CC5FFB}

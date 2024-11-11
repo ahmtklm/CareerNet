@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\CareerNetJob.BLL\CareerNetJob.BusinessLogic\CareerNetJob.BusinessLogic.csproj" />
+    <ProjectReference Include="..\..\Shared\EventShared\EventShared.csproj" />
   </ItemGroup>
 
 </Project>

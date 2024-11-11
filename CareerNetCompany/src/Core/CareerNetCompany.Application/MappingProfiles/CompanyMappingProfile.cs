@@ -15,10 +15,13 @@ namespace CareerNetCompany.Application.MappingProfiles
             CreateMap<Company, CompanyDto>().ReverseMap();
 
             // Company entity'sini CompanyCreateDto'ya map et
-            CreateMap<CompanyCreateDto, Company>();
+            CreateMap<CompanyCreateDto, Company>().ReverseMap();
 
             // Company entity'sini CompanyUpdateDto'ya map et
-            CreateMap<CompanyUpdateDto, Company>();
+            CreateMap<CompanyUpdateDto, Company>().ReverseMap();
+
+            // CompanyDto entity'sini CompanyUpdateDto'ya map et
+            CreateMap<CompanyUpdateDto, CompanyDto>().ReverseMap();
         }
     }
 }

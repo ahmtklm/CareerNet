@@ -3,7 +3,7 @@ using CareerNetJob.API.Middlewares;
 using CareerNetJob.BusinessLogic;
 using CareerNetJob.BusinessLogic.EventConsumers.ConfirmedJobRight;
 using CareerNetJob.BusinessLogic.EventConsumers.DeniedJobRight;
-using CareerNetJob.BusinessLogic.Shared.EventsQueue;
+using EventShared.EventsQueue;
 using FluentValidation.AspNetCore;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;

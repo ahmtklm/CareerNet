@@ -1,6 +1,6 @@
 ﻿using CareerNetJob.BusinessLogic.Abstractions;
 using CareerNetJob.BusinessLogic.Dtos;
-using CareerNetJob.BusinessLogic.Shared.Events;
+using EventShared.Events;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 

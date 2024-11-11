@@ -29,15 +29,22 @@ namespace CareerNetJob.BusinessLogic.Concretes
 
         public async Task<List<string>> GetRestrictedWordsAsync()
         {
-            var restrictedWordsJson = await _database.StringGetAsync(_redisRestrictedWordsKey);
+            try
+            {
+                var restrictedWordList = await _database.ListRangeAsync(_redisRestrictedWordsKey);
 
-            //Redis'de yasaklı kelime yoksa boş liste döndürür
-            if (string.IsNullOrEmpty(restrictedWordsJson))
-                return [];
+                //Redis'de yasaklı kelime yoksa boş liste döndürür
+                if (!restrictedWordList.Any())
+                    return [];
 
-            var restrictedWords = JsonSerializer.Deserialize<List<string>>(restrictedWordsJson!);
+                var restrictedWords = restrictedWordList.Select(p=>p.ToString()).ToList();
 
-            return restrictedWords!;
+                return restrictedWords!;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
