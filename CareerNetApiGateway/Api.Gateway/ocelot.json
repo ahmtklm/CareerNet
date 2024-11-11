@@ -1,15 +1,15 @@
 {
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:7046"
+    "BaseUrl": "http://localhost:5182"
   },
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/Job/GetAllJobs",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7196
+          "Port": 5180
         }
       ],
       "UpstreamPathTemplate": "/job/get-all-jobs",
@@ -17,11 +17,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/Job/GetAllJobsByExpireDate",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7196
+          "Port": 5180
         }
       ],
       "UpstreamPathTemplate": "/job/get-all-jobs-by-expire-date",
@@ -29,11 +29,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/Job/PublishJob",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7196
+          "Port": 5180
         }
       ],
       "UpstreamPathTemplate": "/job/publish-job",
@@ -41,11 +41,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/Company/Create",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7195
+          "Port": 5181
         }
       ],
       "UpstreamPathTemplate": "/company/create",
@@ -57,7 +57,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7195
+          "Port": 5181
         }
       ],
       "UpstreamPathTemplate": "/company/get-all-companies",
@@ -69,7 +69,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7195
+          "Port": 5181
         }
       ],
       "UpstreamPathTemplate": "/company/get-company-by-id",
@@ -81,7 +81,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7195
+          "Port": 5181
         }
       ],
       "UpstreamPathTemplate": "/company/update",
@@ -93,7 +93,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 7195
+          "Port": 5181
         }
       ],
       "UpstreamPathTemplate": "/company/delete",

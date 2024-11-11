@@ -13,9 +13,7 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
-//Validation Filter eklendiði kýsým
 builder.Services.AddControllers(options => options.Filters.Add<CompanyValidationFilter>()).AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
@@ -25,6 +23,27 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
 });
+
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
+
+//Environment bilgisine göre appsettings dosyasýný yükleyen kýsým
+var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+builder.Configuration
+    .AddJsonFile($"appsettings.{environment}.json", optional: true);
+
+//Application katmanýndaki servisleri IOC'a ekler
+builder.Services.AddApplicationServices();
+
+//Persistance katmanýndaki servisleri IOC'a ekler.
+builder.Services.AddPersistanceServices(builder.Configuration);
+builder.Services.AddHealthChecks();
 
 // RabbitMQ ayarlarýný appsettings'ten alýr
 var rabbitMQSettings = builder.Configuration.GetSection("RabbitMQSettings").Get<RabbitMQSettings>();
@@ -48,27 +67,6 @@ builder.Services.AddMassTransit(configurator =>
     });
 });
 
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    c.IncludeXmlComments(xmlPath);
-});
-
-//Environment bilgisine göre appsettings dosyasýný yükleyen kýsým
-var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-builder.Configuration
-    .AddJsonFile($"appsettings.{environment}.json", optional: true);
-
-//Application katmanýndaki servisleri IOC'a ekler
-builder.Services.AddApplicationServices();
-
-//Persistance katmanýndaki servisleri IOC'a ekler.
-builder.Services.AddPersistanceServices(builder.Configuration);
-
 //Fluent Validation
 builder.Services.AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();
@@ -90,5 +88,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MapHealthChecks("/health");
 app.Run();

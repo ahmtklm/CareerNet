@@ -1,12 +1,8 @@
 using CareerNetJob.API.Configuration;
 using CareerNetJob.API.Middlewares;
 using CareerNetJob.BusinessLogic;
-using CareerNetJob.BusinessLogic.Abstractions;
-using CareerNetJob.BusinessLogic.Concretes;
-using CareerNetJob.BusinessLogic.Configuration;
 using CareerNetJob.BusinessLogic.EventConsumers.ConfirmedJobRight;
 using CareerNetJob.BusinessLogic.EventConsumers.DeniedJobRight;
-using CareerNetJob.BusinessLogic.Shared.Events;
 using CareerNetJob.BusinessLogic.Shared.EventsQueue;
 using FluentValidation.AspNetCore;
 using MassTransit;
@@ -16,17 +12,17 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-#region AddControllers-JobValidationFilter
-
 //Validation Filter eklendiði kýsým
 builder.Services.AddControllers(options => options.Filters.Add<JobValidationFilter>()).AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
-#endregion
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
+
 
 #region builder.Configuration.AddJsonFile
 
@@ -36,12 +32,6 @@ builder.Configuration
     .AddJsonFile($"appsettings.{environment}.json", optional: true);
 
 #endregion
-
-
-builder.Services.Configure<ApiBehaviorOptions>(options =>
-{
-    options.SuppressModelStateInvalidFilter = true;
-});
 
 #region Business Logic Layer DI Configuration
 
@@ -69,7 +59,6 @@ builder.Services.AddMassTransit(configurator =>
             h.Password(rabbitMQSettings.Password!);
         });
 
-
         _cfg.ReceiveEndpoint(RabbitMqQueue.CompanyJobRightConfirmedEventQueue, e => e.ConfigureConsumer<CompanyJobRightConfirmedEventConsumer>(context));
 
         _cfg.ReceiveEndpoint(RabbitMqQueue.CompanyJobRightDeniedEventQueue, e => e.ConfigureConsumer<CompanyJobRightDeniedEventConsumer>(context));
@@ -77,6 +66,9 @@ builder.Services.AddMassTransit(configurator =>
 });
 
 #endregion
+
+builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -88,7 +80,6 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
-builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 
 var app = builder.Build();
 
