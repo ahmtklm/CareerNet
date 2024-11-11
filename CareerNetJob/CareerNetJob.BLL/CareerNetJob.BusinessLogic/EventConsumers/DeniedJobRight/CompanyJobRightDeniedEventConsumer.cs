@@ -1,4 +1,5 @@
-﻿using EventShared.Events;
+﻿using CareerNetJob.BusinessLogic.EventConsumers.ConfirmedJobRight;
+using EventShared.Events;
 using MassTransit;
 
 namespace CareerNetJob.BusinessLogic.EventConsumers.DeniedJobRight
@@ -15,7 +16,6 @@ namespace CareerNetJob.BusinessLogic.EventConsumers.DeniedJobRight
             var companyId = context.Message.CompanyId;
 
             await Task.CompletedTask;
-            throw new Exception($"{companyId} Id'li firmanın ilan yayınlama hakkı yoktur.");
         }
     }
 }

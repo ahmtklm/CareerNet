@@ -64,6 +64,9 @@ namespace CareerNetCompany.Application.EventConsumers.CheckCompanyJobRight
                     HasJobRight = true
                 };
 
+                // Başarılı yanıt döner
+                await context.RespondAsync(confirmedEvent);
+
                 //Eventi Send ediyoruz belirli kuyruğa.
                 ISendEndpoint sendEndpoint = await _sendEndpointProvider.GetSendEndpoint(new Uri($"queue:{RabbitMqQueue.CompanyJobRightConfirmedEventQueue}"));
 
@@ -73,6 +76,9 @@ namespace CareerNetCompany.Application.EventConsumers.CheckCompanyJobRight
             {
                 //İlan yayınlama hakkı yoksa bu eventi dinleyen consumer'lara gönderir.
                 CompanyJobRightDeniedEvent deniedEvent = new() { CompanyId = companyId, HasJobRight = false };
+
+                // Başarılı yanıt döner
+                await context.RespondAsync(deniedEvent);
 
                 await _publishEndpoint.Publish(deniedEvent);
             }

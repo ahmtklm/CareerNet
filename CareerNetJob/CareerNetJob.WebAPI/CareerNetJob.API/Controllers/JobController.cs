@@ -1,5 +1,6 @@
 ﻿using CareerNetJob.BusinessLogic.Abstractions;
 using CareerNetJob.BusinessLogic.Dtos;
+using CareerNetJob.BusinessLogic.EventConsumers;
 using EventShared.Events;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
@@ -15,16 +16,19 @@ namespace CareerNetJob.API.Controllers
     {
         private readonly IPublishEndpoint _publishEndpoint;
         private readonly IJobService _jobService;
+        private readonly IRequestClient<CheckCompanyJobRightEvent> _requestClient;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="jobService"></param>
         /// <param name="publishEndpoint"></param>
-        public JobController(IJobService jobService,IPublishEndpoint publishEndpoint)
+        /// <param name="requestClient"></param>
+        public JobController(IJobService jobService, IPublishEndpoint publishEndpoint, IRequestClient<CheckCompanyJobRightEvent> requestClient)
         {
             _jobService = jobService;
             _publishEndpoint = publishEndpoint;
+            _requestClient = requestClient;
         }
 
         /// <summary>
@@ -63,7 +67,7 @@ namespace CareerNetJob.API.Controllers
         public async Task<IActionResult> PublishJob(JobCreateDto jobCreateDto)
         {
             //Firmanın İlan hakkı check eden bir event oluşturuluır
-            CheckCompanyJobRightEvent jobevent = new()
+            CheckCompanyJobRightEvent jobEvent = new()
             {
                 Benefits = jobCreateDto.Benefits,
                 CompanyId = jobCreateDto.CompanyId,
@@ -73,9 +77,15 @@ namespace CareerNetJob.API.Controllers
                 EmploymentType = jobCreateDto.EmploymentType
             };
 
-            await _publishEndpoint.Publish(jobevent);
+            var response = await _requestClient.GetResponse<CompanyJobRightDeniedEvent, CompanyJobRightConfirmedEvent>(jobEvent);
 
-            return Created();
+            if (response.Is<CompanyJobRightDeniedEvent>(out var deniedEvent))
+                return BadRequest($"{deniedEvent.Message.CompanyId} Id'li Firmanın İlan Yayınlama Hakkı Yoktur.");
+
+            else if (response.Is<CompanyJobRightConfirmedEvent>(out var confirmedEvent))
+                return Ok($"{confirmedEvent.Message.CompanyId} Id'li firmanın ilan yayınlama işlemi başarıyla tamamlanmıştır.");
+
+            return NoContent();
         }
     }
 }

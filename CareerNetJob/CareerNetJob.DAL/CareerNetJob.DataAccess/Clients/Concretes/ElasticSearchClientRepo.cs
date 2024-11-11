@@ -57,7 +57,8 @@ namespace CareerNetJob.DataAccess.Clients.Concretes
         {
             var result = await _elasticsearchClient.SearchAsync<T>(s => s.Index(indexName)
                                                                          .Sort(sort => sort
-                                                                         .Field(f => f.PostedDate, p => p.Order(SortOrder.Desc))));
+                                                                         .Field(f => f.PostedDate, p => p.Order(SortOrder.Desc)))
+                                                                         .Size(100));
 
             return [.. result.Documents];
         }
