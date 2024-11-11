@@ -21,11 +21,6 @@
         public required string Description { get; set; }
 
         /// <summary>
-        /// İlanın yayınlanma tarihi
-        /// </summary>
-        public required DateTime PostedDate  { get; set; } = DateTime.UtcNow;
-
-        /// <summary>
         /// İlan Kalite Skoru
         /// </summary>
         public int? QualityScore { get; set; }

@@ -55,8 +55,11 @@ namespace CareerNetJob.DataAccess.Clients.Concretes
         /// <returns></returns>
         public async Task<List<T>> GetAllDocuments(string indexName)
         {
-            var result = await _elasticsearchClient.SearchAsync<T>(s => s.Index(indexName));
-            return [.. result.Documents];//result.Documents.ToList();
+            var result = await _elasticsearchClient.SearchAsync<T>(s => s.Index(indexName)
+                                                                         .Sort(sort => sort
+                                                                         .Field(f => f.PostedDate, p => p.Order(SortOrder.Desc))));
+
+            return [.. result.Documents];
         }
 
         /// <summary>

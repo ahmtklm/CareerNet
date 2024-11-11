@@ -11,5 +11,10 @@
         /// İlanın yayında kalma süresi.İlan yayınlama tarihinden 15 gün sonrası olacak
         /// </summary>
         public required DateTime ExpireDate { get; set; }
+
+        /// <summary>
+        /// İlanın yayınlanma tarihi
+        /// </summary>
+        public required DateTime PostedDate { get; set; } = DateTime.UtcNow;
     }
 }
