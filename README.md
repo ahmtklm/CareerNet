@@ -35,3 +35,6 @@ CareerNetJob servisi, iş ilanlarının oluşturulması ve sorgulanması için y
 - **MassTransit**:RabbitMQ ile mikroservisler arasında mesajlaşmayı sağlayan kütüphane.
 
 ##### Documentations
+- [CareerNet Genel Proje Dökümanı](https://github.com/ahmtklm/CareerNet/blob/master/docs/CareerNet.docx)
+- [CareerNet Job Mikroservisi Dökümanı](https://github.com/ahmtklm/CareerNet/blob/master/docs/CareerNetJob.docx)
+- [CareerNet Company Mikroservisi Dökümanı](https://github.com/ahmtklm/CareerNet/blob/master/docs/CareerNetCompany.docx)
