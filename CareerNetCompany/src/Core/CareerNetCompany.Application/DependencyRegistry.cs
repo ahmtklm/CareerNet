@@ -9,9 +9,9 @@ namespace CareerNetCompany.Application
     /// Application katmanındaki bağımlılıkları DI (Dependency Injection) sistemine eklemek için kullanılan sınıf.
     /// Bu sınıf, Application katmanındaki servislerin DI'a eklenmesini sağlar.
     /// </summary>
-    public static class ServiceRegistration
+    public static class DependencyRegistry
     {
-        public static void AddApplicationServices(this IServiceCollection services)
+        public static void RegisterApplicationServices(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssemblyContaining<CompanyCreateDtoValidator>();

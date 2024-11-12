@@ -1,6 +1,5 @@
 ﻿using CareerNetJob.BusinessLogic.Abstractions;
 using CareerNetJob.BusinessLogic.Dtos;
-using CareerNetJob.BusinessLogic.EventConsumers;
 using EventShared.Events;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +9,7 @@ namespace CareerNetJob.API.Controllers
     /// <summary>
     /// İş İlanları endpointleri barındırır
     /// </summary>
-    [Route("api/[controller]")]
-    [ApiController]
-    public class JobController : ControllerBase
+    public class JobController : CustomBaseController
     {
         private readonly IPublishEndpoint _publishEndpoint;
         private readonly IJobService _jobService;
@@ -80,7 +77,7 @@ namespace CareerNetJob.API.Controllers
             var response = await _requestClient.GetResponse<CompanyJobRightDeniedEvent, CompanyJobRightConfirmedEvent>(jobEvent);
 
             if (response.Is<CompanyJobRightDeniedEvent>(out var deniedEvent))
-                return BadRequest($"{deniedEvent.Message.CompanyId} Id'li Firmanın İlan Yayınlama Hakkı Yoktur.");
+                return Ok($"{deniedEvent.Message.CompanyId} Id'li Firmanın İlan Yayınlama Hakkı Yoktur.");
 
             else if (response.Is<CompanyJobRightConfirmedEvent>(out var confirmedEvent))
                 return Ok($"{confirmedEvent.Message.CompanyId} Id'li firmanın ilan yayınlama işlemi başarıyla tamamlanmıştır.");

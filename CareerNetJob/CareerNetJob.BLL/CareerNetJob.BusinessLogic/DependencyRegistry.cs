@@ -12,16 +12,16 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CareerNetJob.BusinessLogic
 {
-    public static class ServiceRegistration
+    public static class DependencyRegistry
     {
-        public static void AddBusinessLogicServices(this IServiceCollection services, IConfiguration configuration)
+        public static void RegisterBusinessLogicServices(this IServiceCollection services, IConfiguration configuration)
         {
             //AutoMapper
             services.AddAutoMapper(typeof(JobMappingProfile));
             //IJobService
             services.AddScoped<IJobService,JobService>();
             //DataAccess katmanındaki DI' kısımlarını burada çağırıyorum. API katmanında direkt data accesse bağımlı olmaması için
-            services.AddDataAccessServices();
+            services.RegisterDataAccessServices();
             //Fluent Validator
             services.AddValidatorsFromAssemblyContaining<JobCreateDtoValidator>();
 

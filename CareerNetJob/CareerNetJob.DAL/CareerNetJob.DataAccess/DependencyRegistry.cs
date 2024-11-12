@@ -4,9 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CareerNetJob.DataAccess
 {
-    public static class ServiceRegistration
+    public static class DependencyRegistry
     {
-        public static void AddDataAccessServices(this IServiceCollection services)
+        public static void RegisterDataAccessServices(this IServiceCollection services)
         {
             services.AddScoped(typeof(IElasticSearchClientRepo<>), typeof(ElasticSearchClientRepo<>));
         }

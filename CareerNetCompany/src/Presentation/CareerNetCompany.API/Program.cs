@@ -39,10 +39,10 @@ builder.Configuration
     .AddJsonFile($"appsettings.{environment}.json", optional: true);
 
 //Application katmanýndaki servisleri IOC'a ekler
-builder.Services.AddApplicationServices();
+builder.Services.RegisterApplicationServices();
 
 //Persistance katmanýndaki servisleri IOC'a ekler.
-builder.Services.AddPersistanceServices(builder.Configuration);
+builder.Services.RegisterPersistanceServices(builder.Configuration);
 builder.Services.AddHealthChecks();
 
 // RabbitMQ ayarlarýný appsettings'ten alýr

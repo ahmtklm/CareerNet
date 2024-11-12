@@ -36,7 +36,7 @@ builder.Configuration
 #region Business Logic Layer DI Configuration
 
 //Business katmanýndaki DI inject eder.
-builder.Services.AddBusinessLogicServices(builder.Configuration);
+builder.Services.RegisterBusinessLogicServices(builder.Configuration);
 
 #endregion
 

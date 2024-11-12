@@ -13,9 +13,9 @@ namespace CareerNetCompany.Persistance
     /// <summary>
     /// Persistence katmanındaki bağımlılıkları DI sistemine eklemek için kullanılan sınıf.
     /// </summary>
-    public static class ServiceRegistration
+    public static class DependencyRegistry
     {
-        public static void AddPersistanceServices(this IServiceCollection services,IConfiguration configuration)
+        public static void RegisterPersistanceServices(this IServiceCollection services,IConfiguration configuration)
         {
             // IRepository ve Repository sınıflarını DI sistemine ekler
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
