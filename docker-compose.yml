@@ -1,0 +1,77 @@
+services:
+  postgresql:
+    image: postgres:latest
+    container_name: postgresql
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin123
+      - POSTGRES_DB=CareerNet
+    ports:
+      - 5432:5432
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - challenge
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.10
+    container_name: elasticsearch
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=true
+      - ELASTIC_USERNAME=elastic
+      - ELASTIC_PASSWORD=careerNetElastic
+    networks:
+      - challenge
+  redis:
+    image: redis
+    container_name: redis-server
+    ports:
+      - 6379:6379
+    networks:
+      - challenge
+    depends_on:
+    - postgresql
+  gateway-api:
+    build:
+        context: .
+        dockerfile: CareerNetApiGateway/Dockerfile
+    container_name: gateway-api
+    ports:
+    - 5000:80
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+    - challenge
+  company-api:
+    build:
+        context: .
+        dockerfile: CareerNetCompany/Dockerfile
+    container_name: company-api
+    ports:
+    - 5001:80
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+    - challenge
+  job-api:
+    build:
+        context: .
+        dockerfile: CareerNetJob/Dockerfile
+    container_name: jop-api
+    ports:
+    - 5002:80
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+    - challenge
+
+networks:
+  challenge:
+    driver: bridge
