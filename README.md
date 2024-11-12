@@ -33,3 +33,5 @@ CareerNetJob servisi, iş ilanlarının oluşturulması ve sorgulanması için y
 - **Redis**:Sakıncalı kelime listesi gibi nadiren değişen veriler için kullanılan hızlı önbellek çözümü.
 - **RabbitMQ**:İş ilanları oluşturulmadan önce işverenin ilan yayınlama hakkını kontrol eden mesajlaşma sistemi.
 - **MassTransit**:RabbitMQ ile mikroservisler arasında mesajlaşmayı sağlayan kütüphane.
+
+##### Documentations
